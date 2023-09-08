@@ -189,6 +189,48 @@ const authvalidator = {
   ]
 } 
 
-
-module.exports = { productValidator,authvalidator};
+const cartValidator = {
+  add: [
+    body("product")
+      .exists()
+      .withMessage("Product was not provided")
+      .bail()
+      .notEmpty()
+      .withMessage("Product cannot be empty")
+      .bail()
+      .isString()
+      .withMessage("Product must be a string")
+      .bail()
+      .isMongoId()
+      .withMessage("Product must be a valid mongo id"),
+    body("quantity")
+      .exists()
+      .withMessage("Quantity was not provided")
+      .bail()
+      .notEmpty()
+      .withMessage("Quantity cannot be empty")
+      .bail()
+      .isNumeric()
+      .withMessage("Quantity must be a number")
+      .bail()
+      .isInt({ min: 1 })
+      .withMessage("Quantity must be a positive number")
+      .bail()
+      .isLength({max:10})
+      .withMessage("Too long input"),
+    body("user")
+      .exists()
+      .withMessage("User was not provided")
+      .bail()
+      .notEmpty()
+      .withMessage("User cannot be empty")
+      .bail()
+      .isString()
+      .withMessage("User must be a string")
+      .bail()
+      .isMongoId()
+      .withMessage("User must be a valid mongo id"),
+  ]
+};
+module.exports = { productValidator,authvalidator,cartValidator};
 

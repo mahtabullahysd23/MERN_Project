@@ -6,6 +6,7 @@ const ProductRouter = require("./routers/Product");
 const UserRouter = require("./routers/User");
 const OrderRouter = require("./routers/Order");
 const AuthRouter = require("./routers/Auth");
+const CartRouter = require("./routers/Cart");
 const {failure} = require('./utility/common');
 const connectDB = require("./config/database");
 app.use(express.json());
@@ -17,6 +18,7 @@ app.use("/products", ProductRouter);
 app.use("/orders", OrderRouter);
 app.use("/users", UserRouter);
 app.use("/auth", AuthRouter);
+app.use("/cart", CartRouter);
 app.use((req, res) => {
     res.status(404).send(failure("Page Not Found"));
   });

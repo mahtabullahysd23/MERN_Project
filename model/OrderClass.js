@@ -9,6 +9,10 @@ const OrderSchema = new mongoose.Schema({
         ref: "User",
         required: [true, "User is required"]
     },
+    cart:{
+        type: Object,
+        required: [true, "Cart is required"]
+    },
     products: {
         type: [
             {
@@ -20,8 +24,8 @@ const OrderSchema = new mongoose.Schema({
                 quantity: {
                     type: Number,
                     required: [true, "Quantity is required"]
-                }
-                
+                },
+                _id:false,
             }
         ],
     },
