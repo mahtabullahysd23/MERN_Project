@@ -189,6 +189,102 @@ const authvalidator = {
   ]
 } 
 
+const cartValidator = {
+  add: [
+    body("product")
+      .exists()
+      .withMessage("Product was not provided")
+      .bail()
+      .notEmpty()
+      .withMessage("Product cannot be empty")
+      .bail()
+      .isString()
+      .withMessage("Product must be a string")
+      .bail()
+      .isMongoId()
+      .withMessage("Product must be a valid mongo id"),
+    body("quantity")
+      .exists()
+      .withMessage("Quantity was not provided")
+      .bail()
+      .notEmpty()
+      .withMessage("Quantity cannot be empty")
+      .bail()
+      .isNumeric()
+      .withMessage("Quantity must be a number")
+      .bail()
+      .isInt({ min: 1 })
+      .withMessage("Quantity must be a positive number")
+      .bail()
+      .isLength({max:10})
+      .withMessage("Too long input"),
+    body("user")
+      .exists()
+      .withMessage("User was not provided")
+      .bail()
+      .notEmpty()
+      .withMessage("User cannot be empty")
+      .bail()
+      .isString()
+      .withMessage("User must be a string")
+      .bail()
+      .isMongoId()
+      .withMessage("User must be a valid mongo id"),
+  ]
 
-module.exports = { productValidator,authvalidator};
+};
+
+const reviewValidator = {
+  add: [
+    body("product")
+      .exists()
+      .withMessage("Product was not provided")
+      .bail()
+      .notEmpty()
+      .withMessage("Product cannot be empty")
+      .bail()
+      .isString()
+      .withMessage("Product must be a string")
+      .bail()
+      .isMongoId()
+      .withMessage("Product must be a valid mongo id"),
+    body("rating")
+      .exists()
+      .withMessage("Rating was not provided")
+      .bail()
+      .notEmpty()
+      .withMessage("Rating cannot be empty")
+      .bail()
+      .isNumeric()
+      .withMessage("Rating must be a number")
+      .bail()
+      .isFloat({ min: 1, max: 5 })
+      .withMessage("Rating must be a number between 1 and 5"),
+    body("review")
+
+      .exists()
+      .withMessage("Review was not provided")
+      .bail()
+      .notEmpty()
+      .withMessage("Review cannot be empty")
+      .bail()
+      .isString()
+      .withMessage("Review must be a string")
+      .isLength({ max: 100 })
+      .withMessage("Review cannot be more than 100 characters"),
+    body("user")
+      .exists()
+      .withMessage("User was not provided")
+      .bail()
+      .notEmpty()
+      .withMessage("User cannot be empty")
+      .bail()
+      .isString()
+      .withMessage("User must be a string")
+      .bail()
+      .isMongoId()
+      .withMessage("User must be a valid mongo id"),
+  ]
+}
+module.exports = { productValidator,authvalidator,cartValidator,reviewValidator};
 
