@@ -193,7 +193,7 @@ class ProductController {
     async getOne(req, res) {
         try {
             const { id } = req.params;
-            const productbyID = await Product.findById({ _id: id });
+            const productbyID = await Product.findById({ _id: id }).populate("reviews")
             if (productbyID) {
                 return res.status(200).send(success("successfully Received Product", productbyID));
             }
@@ -283,16 +283,6 @@ class ProductController {
             return res.status(500).send(failure("Internal Server Error", e));
         }
     }
-
-    async buyProduct(req, res) {
-        try {
-        }
-        catch (e) {
-            return res.status(500).send(failure("Internal Server Error", e));
-        }
-
-    }
-
 }
 
 module.exports = new ProductController();

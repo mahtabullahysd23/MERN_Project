@@ -19,6 +19,21 @@ const ProductSchema = new mongoose.Schema({
   author: {
     type: String,
     required: [true,"Author is required"]
+  },
+  rating: {
+    type: Number,
+    required: false,
+    default: 0
+  },
+  reviews: {
+    type: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Review",
+      },
+    ],
+    required: false,
+    _id: false,
   }
 });
 
